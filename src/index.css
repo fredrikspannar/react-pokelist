@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Paytone One', sans-serif;
+    @apply text-xl;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl mb-4;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  nav ul li {
+    @apply hover:invert;
+  }
+
+  nav ul li svg {
+    @apply inline-block;
+  }
+}
