@@ -18,7 +18,9 @@ export default function Start() {
 
     useEffect(() => {
         // get favorites from local storage on load
-        setFavorites( JSON.parse(localStorage.getItem("favorites")) );
+        let loadedFavorites = JSON.parse(localStorage.getItem("favorites"));
+        if ( !loadedFavorites ) loadedFavorites = [];
+        setFavorites( loadedFavorites );
     }, []);
 
     useEffect(() => {
