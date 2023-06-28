@@ -30,8 +30,6 @@ export default function Settings() {
         forceUpdate();
     }
 
-    console.log('BEFORE RENDER savedSettings = ',savedSettings);
-
     if ( !savedSettings ) {
         return (
             <Layout>
