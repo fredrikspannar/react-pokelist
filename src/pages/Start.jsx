@@ -15,6 +15,7 @@ export default function Start() {
     const style = useRef(0);
 
     const [ favorites, setFavorites ] = useState([]);
+    const [ successMessage, setSuccessMessage ] = useState(false);
 
     useEffect(() => {
         // get favorites from local storage on load
@@ -76,10 +77,14 @@ export default function Start() {
     }
 
     const handleToggleFavorite = (id, name) => {
-        if ( favorites.length > 0 && favorites[id] ) {
+        const exists = favorites && favorites.find((item) => item.id == id) ? true : false;
+
+        if ( favorites.length > 0 && exists) {
             // remove
             const newFavorites = favorites.filter((item) => item.id !== id);
+            
             setFavorites(newFavorites);
+            setSuccessMessage("Favorite has been removed");
 
         } else {
             // add
@@ -88,12 +93,29 @@ export default function Start() {
                 name: name
             };
 
-            setFavorites([... favorites, newFavorite]);
+            setFavorites([...favorites, newFavorite]);
+            setSuccessMessage("New favorite has been saved");
         }
+    }
+
+    const getIdFromURL = (url) => {
+        // url is for example https://pokeapi.co/api/v2/pokemon/1/
+        // where the last part after "pokemon" is the id we need
+        // so first we split by / and then filter the array to
+        // only numbers and then map the array with number which
+        // will typecast string into a number and finally shift the array
+        // to only get the first item
+        const urlParts = url.split('/');
+        return urlParts.filter(Number).map(Number).shift();
+    }
+
+    const clearSuccessMessage = () => {
+        setSuccessMessage(false);
     }
 
     return (
         <Layout>
+            {successMessage && <Message>{successMessage}</Message>}
 
             {!pokemons && !apiError && <Spinner />}  {/* We could use a seperate state for loading but since if there is no data then pokemons is null */}
             
@@ -112,7 +134,7 @@ export default function Start() {
                         </select>
                     </div>
                     <div className="flex flex-wrap justify-between">
-                        {pokemons.map((item, index) => <PokeCard name={item.name} url={item.url} key={index} style={style.current.style} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />)}
+                        {pokemons.map((item, index) => <PokeCard name={item.name} id={getIdFromURL(item.url)} key={index} style={style.current.style} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />)}
                     </div>
                     <div className="flex justify-between mb-6">
                         <div className="text-opacity-50">

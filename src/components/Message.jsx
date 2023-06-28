@@ -29,7 +29,7 @@ export default function Message({type="information", children, timeout=5000}) {
 
     // render message
     return (
-        <div className={`p-4 ${typeClass} ${borderClass} border-0 border-l-8 border-solid z-10 min-w-72 min-w-max absolute top-12 right-6`}>
+        <div className={`message ${typeClass} ${borderClass}`}>
             {children}
         </div>
     )

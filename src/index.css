@@ -35,4 +35,12 @@
   .navlink-active {
     @apply text-white hover:text-black;
   }
+
+  .min-w-72 {
+    min-width: 18rem;
+  }
+
+  .message {
+    @apply p-4 border-0 border-l-8 border-solid z-10 min-w-72 min-w-max absolute top-12 right-6;
+  }
 }
