@@ -6,15 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 
-export default function PokeCard({name, id, /*url,*/ style, handleToggleFavorite=null, favorites=[]}) {
-    // url is for example https://pokeapi.co/api/v2/pokemon/1/
-    // where the last part after "pokemon" is the id we need
-    // so first we split by / and then filter the array to
-    // only numbers and then map the array with number which
-    // will typecast string into a number and finally shift the array
-    // to only get the first item
-    /*const urlParts = url.split('/');
-    let id = urlParts.filter(Number).map(Number).shift();*/
+export default function PokeCard({name, id, style, handleToggleFavorite=null, favorites=[]}) {
 
     // setup image type based on style
     const imageURL = `${config.baseImageURL}/${style}/`;
