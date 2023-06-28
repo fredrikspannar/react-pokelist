@@ -18,8 +18,7 @@ export default function Start() {
 
     useEffect(() => {
         // get favorites from local storage on load
-        const loadedFavorites = JSON.parse(localStorage.getItem("favorites"));
-        if ( loadedFavorites ) setFavorites( loadedFavorites );
+        setFavorites( JSON.parse(localStorage.getItem("favorites")) );
     }, []);
 
     useEffect(() => {
@@ -79,7 +78,7 @@ export default function Start() {
             // remove
             const newFavorites = favorites.filter((item) => item.id !== id);
             setFavorites(newFavorites);
-            
+
         } else {
             // add
             const newFavorite = {

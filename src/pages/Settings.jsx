@@ -1,41 +1,36 @@
 
 
 import Layout from "../components/Layout";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Spinner from "../components/Spinner";
 import config from "../config.json";
 
 
 export default function Settings() {
-    const [ savedSettings, setSavedSettings ] = useState(JSON.parse(localStorage.getItem("settings")));
+    const [ savedSettings, setSavedSettings ] = useState([]);
 
-    /*useEffect(() => {
-        /// side-effect with localstorage should be put in useEffect or an eventhandler
-       
-        const newSettings = JSON.parse(localStorage.getItem("settings"));
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
 
-        console.log('on load with newSettings = ',newSettings);
-
-        setSavedSettings(newSettings);
-
-    },[]); */
-
+    useEffect(() => {
+        // load from settings on load, run once
+        setSavedSettings(JSON.parse(localStorage.getItem("settings")));
+    },[]);
 
     const handleChangeStyle = (e) => {
-        
-
         let newSettings = savedSettings;
 
         if ( !newSettings ) newSettings = {style: 'dream-world'};
-
         newSettings.style = e.target.value;
-        setSavedSettings(newSettings);        
+        
+        // update settings in local storage
+        localStorage.setItem("settings", JSON.stringify(newSettings));
 
-        localStorage.setItem('settings', JSON.stringify(newSettings));
-
-        console.log('handleChangeStyle newSettings = ',newSettings);
+        // force re-render of current page to reflect changes         
+        forceUpdate();
     }
 
+    console.log('BEFORE RENDER savedSettings = ',savedSettings);
 
     if ( !savedSettings ) {
         return (
@@ -44,8 +39,6 @@ export default function Settings() {
             </Layout>
         );
     }
-
-    console.log('rendering with settings = ',savedSettings);
 
     return (
         <Layout>
@@ -71,8 +64,6 @@ export default function Settings() {
                     Official
                 </p>
             </fieldset>
-
-{savedSettings.style}
 
         </Layout>
     )
