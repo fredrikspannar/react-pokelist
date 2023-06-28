@@ -1,5 +1,5 @@
 
-
+import Message from "../components/Message";
 import Layout from "../components/Layout";
 import { useState, useEffect, useCallback } from "react";
 import Spinner from "../components/Spinner";
@@ -8,9 +8,7 @@ import config from "../config.json";
 
 export default function Settings() {
     const [ savedSettings, setSavedSettings ] = useState([]);
-
-    const [, updateState] = useState();
-    const forceUpdate = useCallback(() => updateState({}), []);
+    const [ successMessage, setSuccessMessage ] = useState(false);
 
     useEffect(() => {
         // load from settings on load, run once
@@ -28,8 +26,8 @@ export default function Settings() {
         // update settings in local storage
         localStorage.setItem("settings", JSON.stringify(newSettings));
 
-        // force re-render of current page to reflect changes         
-        forceUpdate();
+        // set feedback message
+        setSuccessMessage("Style has been set");
     }
 
     if ( !savedSettings ) {
@@ -40,8 +38,13 @@ export default function Settings() {
         );
     }
 
+    const clearSuccessMessage = () => {
+        setSuccessMessage(false);
+    }
+
     return (
         <Layout>
+            {successMessage && <Message onTimeoutCallback={clearSuccessMessage}>{successMessage}</Message>}
 
             <h2>Settings</h2>
             

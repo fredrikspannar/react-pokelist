@@ -4,8 +4,8 @@ export default function Message({type="information", children, timeout=5000, onT
     const [ isClosed, setIsClosed ] = useState(false);
 
     // setup message background based on type
-    let typeClass = "bg-yellow-300";
-    let borderClass = "border-yellow-600";
+    let typeClass = "bg-green-300";
+    let borderClass = "border-green-600";
 
     if ( type.toLowerCase() == 'error' ){
         typeClass = "border-red-600";
