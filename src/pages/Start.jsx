@@ -5,8 +5,6 @@ import PokeCard from "../components/PokeCard";
 import Message from "../components/Message";
 import config from "../config.json";
 
-
-
 export default function Start() {
     const [ pokemons, setPokemons ] = useState(null);
     const [ page, setPage ] = useState(1);
@@ -15,6 +13,19 @@ export default function Start() {
     const numResults = useRef(0); // save number of hits, we need to hold that value but it is not state
     const numPages = useRef(0); // save number of pages, we need to hold that value but it is not state
     const style = useRef(0);
+
+    const [ favorites, setFavorites ] = useState([]);
+
+    useEffect(() => {
+        // get favorites from local storage on load
+        const loadedFavorites = JSON.parse(localStorage.getItem("favorites"));
+        if ( loadedFavorites ) setFavorites( loadedFavorites );
+    }, []);
+
+    useEffect(() => {
+        // update favorites in local storage
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }, [favorites]);
 
     useEffect(() => {
         // wrap fetch function to use async await
@@ -63,6 +74,23 @@ export default function Start() {
         setPage(page+1);
     }
 
+    const handleToggleFavorite = (id, name) => {
+        if ( favorites.length > 0 && favorites[id] ) {
+            // remove
+            const newFavorites = favorites.filter((item) => item.id !== id);
+            setFavorites(newFavorites);
+            
+        } else {
+            // add
+            const newFavorite = {
+                id: id,
+                name: name
+            };
+
+            setFavorites([... favorites, newFavorite]);
+        }
+    }
+
     return (
         <Layout>
 
@@ -83,7 +111,7 @@ export default function Start() {
                         </select>
                     </div>
                     <div className="flex flex-wrap justify-between">
-                        {pokemons.map((item, index) => <PokeCard name={item.name} url={item.url} key={index} style={style.current.style} />)}
+                        {pokemons.map((item, index) => <PokeCard name={item.name} url={item.url} key={index} style={style.current.style} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />)}
                     </div>
                     <div className="flex justify-between mb-6">
                         <div className="text-opacity-50">
