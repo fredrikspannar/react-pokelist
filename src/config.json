@@ -1,0 +1,4 @@
+{
+    "baseImageURL": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/",
+    "apiURL": "https://pokeapi.co/api/v2/pokemon"
+}

@@ -27,4 +27,8 @@
   nav ul li svg {
     @apply inline-block;
   }
+
+  .btn {
+    @apply py-2 px-4 bg-yellow-300 rounded-xl hover:opacity-50;
+  }
 }
