@@ -14,7 +14,9 @@ export default function Settings() {
 
     useEffect(() => {
         // load from settings on load, run once
-        setSavedSettings(JSON.parse(localStorage.getItem("settings")));
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        if ( !settings ) settings = { style: "dream-world" };
+        setSavedSettings(settings);
     },[]);
 
     const handleChangeStyle = (e) => {
