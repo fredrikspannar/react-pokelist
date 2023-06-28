@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Message({type="information", children, timeout=5000}) {
+export default function Message({type="information", children, timeout=5000, onTimeoutCallback=false}) {
     const [ isClosed, setIsClosed ] = useState(false);
 
     // setup message background based on type
@@ -16,6 +16,8 @@ export default function Message({type="information", children, timeout=5000}) {
         // hide message efter timeout
         const timer = setTimeout(() => {
             setIsClosed(true);
+
+            if (onTimeoutCallback !== false) onTimeoutCallback();
         }, timeout);
 
         // cleanup side-effect

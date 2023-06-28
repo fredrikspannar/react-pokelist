@@ -115,7 +115,7 @@ export default function Start() {
 
     return (
         <Layout>
-            {successMessage && <Message>{successMessage}</Message>}
+            {successMessage && <Message onTimeoutCallback={clearSuccessMessage}>{successMessage}</Message>}
 
             {!pokemons && !apiError && <Spinner />}  {/* We could use a seperate state for loading but since if there is no data then pokemons is null */}
             
