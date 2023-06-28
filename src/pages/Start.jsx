@@ -136,7 +136,7 @@ export default function Start() {
                     <div className="flex flex-wrap justify-between">
                         {pokemons.map((item, index) => <PokeCard name={item.name} id={getIdFromURL(item.url)} key={index} style={style.current.style} handleToggleFavorite={handleToggleFavorite} favorites={favorites} />)}
                     </div>
-                    <div className="flex justify-between mb-6">
+                    <div className="flex justify-between mb-6 lg:mb-12">
                         <div className="text-opacity-50">
                             <p>Results: {numResults.current}</p>
                             <p>Page {page} of {numPages.current}</p>
