@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faHeart, faPalette } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
 
@@ -13,6 +13,7 @@ export default function Navbar() {
                 <ul className="flex items-start ml-12 space-x-6 mt-2">
                     <li><Link to="/"><FontAwesomeIcon icon={faHouse} /> Start</Link></li>
                     <li><Link to="/favorites"><FontAwesomeIcon icon={faHeart} /> My Favorites</Link></li>
+                    <li><Link to="/settings"><FontAwesomeIcon icon={faPalette} /> Settings</Link></li>
                 </ul>
 
             </nav>

@@ -40,6 +40,7 @@ export default function Start() {
     },[page, perPage]);
 
     const handleSetPerPage = (e) => {
+        // set new number per page and clear results
         setPerPage(e.target.value);
         setPokemons(null);
     };
