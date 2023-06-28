@@ -16,28 +16,29 @@ export default function Start() {
     const numPages = useRef(0); // save number of pages, we need to hold that value but it is not state
     const style = useRef(0);
 
-    const getPokeAPI = async () => {
-        const offset = (page-1) * perPage;
-        try {
-            const response = await fetch(`${config.apiURL}?limit=${perPage}&offset=${offset}`,{cache: 'no-cache'});
-            const json = await response.json();
-
-            // set data
-            setPokemons(json.results);
-
-            // set and calculate number of pages
-            numResults.current = Number(json.count);
-            numPages.current = Math.floor(numResults.current / perPage);
-
-        } catch(e) {
-            console.error('API error: ',e);
-
-            setAPIError("Failed to fetch from PokeAPI");
-            setPokemons(null);
-        }
-    };
-
     useEffect(() => {
+        // wrap fetch function to use async await
+        const getPokeAPI = async () => {
+            const offset = (page-1) * perPage;
+            try {
+                const response = await fetch(`${config.apiURL}?limit=${perPage}&offset=${offset}`,{cache: 'no-cache'});
+                const json = await response.json();
+    
+                // set data
+                setPokemons(json.results);
+    
+                // set and calculate number of pages
+                numResults.current = Number(json.count);
+                numPages.current = Math.floor(numResults.current / perPage);
+    
+            } catch(e) {
+                console.error('API error: ',e);
+    
+                setAPIError("Failed to fetch from PokeAPI");
+                setPokemons(null);
+            }
+        };
+
         getPokeAPI();
 
         // get style of pokemon or set default

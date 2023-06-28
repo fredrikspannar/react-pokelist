@@ -21,6 +21,7 @@ export default function PokeCard({name, url, style}) {
     const imageRef = useRef(null);
     const imageSpinnerRef = useRef(null);
 
+    // event when image has been loaded - disable spinner
     const handleLoadedImage = () => {
         imageSpinnerRef.current.classList = "hidden";
         imageRef.current.classList = "";
@@ -34,7 +35,7 @@ export default function PokeCard({name, url, style}) {
             </div>
 
             <div ref={imageSpinnerRef}>
-                <Spinner />
+                <Spinner classess="opacity-70" />
             </div>
         </div>
     )
