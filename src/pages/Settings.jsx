@@ -54,14 +54,12 @@ export default function Settings() {
                     </select>
                 </p>
                 
-                <p className="mt-4">Example:</p>
+                <p className="mt-8 text-sm">Example of style:</p>
                 <p className={savedSettings.style != "dream-world" ? "hidden" : null}>
                     <img src={`${config.baseImageURL}dream-world/25.svg`} alt="dream-world" className="w-20 h-20" />
-                    DreamWorld
                 </p>
                 <p className={savedSettings.style != "official-artwork" ? "hidden" : null}>
                     <img src={`${config.baseImageURL}official-artwork/25.png`} alt="official" className="w-20 h-20"/>
-                    Official
                 </p>
             </fieldset>
 
