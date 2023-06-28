@@ -21,7 +21,7 @@
   }
 
   nav ul li {
-    @apply hover:invert;
+    @apply hover:invert hover:opacity-70;
   }
 
   nav ul li svg {
@@ -30,5 +30,9 @@
 
   .btn {
     @apply py-2 px-4 bg-yellow-300 rounded-xl hover:opacity-50;
+  }
+
+  .navlink-active {
+    @apply text-white hover:text-black;
   }
 }
