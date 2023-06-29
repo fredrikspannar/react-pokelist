@@ -47,4 +47,21 @@
   footer a, .about a {
     @apply underline hover:opacity-50;
   }
+
+  table.pokemon-moves-table {
+    @apply w-full;
+  }
+
+  table.pokemon-moves-table thead th {
+    text-align: left;
+    @apply bg-slate-600 text-white px-4 text-opacity-90;
+  }
+
+  table.pokemon-moves-table tbody tr {
+    @apply odd:bg-slate-300 even:bg-slate-400;
+  }
+
+  table.pokemon-moves-table tbody tr td {
+    @apply p-4;
+  }
 }

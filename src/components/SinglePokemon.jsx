@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SinglePokemonTrainingBreeding from "./SinglePokemonTrainingBreeding";
+import SinglePokemonMoveRow from "./SinglePokemonMoveRow";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 export default function SinglePokemon({pokemon}) {
     const navigate = useNavigate();
@@ -50,7 +52,7 @@ export default function SinglePokemon({pokemon}) {
                                 <tr>
                                     <td valign="top"><span className="text-slate-600">Abilities</span></td>
                                     <td valign="top">
-                                    {pokemon.abilities.map((item, index) => <span key={index} className="block capitalize">{item.ability.name}</span>)}
+                                    {pokemon.abilities.map((item, index) => <span key={`ability-${index}`} className="block capitalize">{item.ability.name}</span>)}
                                     </td>                                                                         
                                 </tr>
                             </tbody>
@@ -72,6 +74,26 @@ export default function SinglePokemon({pokemon}) {
                     </div>
                 </div>
             </div>
+
+            <div className="p-4 border-4 rounded-lg shadow-lg bg-slate-200 mb-20 mt-12">
+                <h4 className="mb-4">Moves</h4>
+                <table className="text-sm pokemon-moves-table" cellPadding="6" cellSpacing="6">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Damage</th>
+                            <th>Power</th>
+                            <th>Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody>                
+                        {pokemon.moves.map((item, index) => <SinglePokemonMoveRow key={`move-${index}`} item={item.move} /> )}
+                    </tbody>
+                </table>
+            </div>
+
+            <ScrollToTopButton />
         </>
     )
 }
