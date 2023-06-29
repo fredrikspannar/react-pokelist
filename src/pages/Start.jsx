@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner";
 import PokeCard from "../components/PokeCard";
 import Message from "../components/Message";
 import config from "../config.json";
-
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 export default function Start() {
     const [ pokemons, setPokemons ] = useState(null);
@@ -147,6 +147,8 @@ export default function Start() {
                             {page < numPages.current && <button className="btn ml-2" onClick={handleNext}>Next &gt;</button> }
                         </div>
                     </div>
+
+                    {perPage >= 40 && <ScrollToTopButton />}
                 </>
             }
 
