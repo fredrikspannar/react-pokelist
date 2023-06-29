@@ -5,6 +5,7 @@ import PokeCard from "../components/PokeCard";
 import Message from "../components/Message";
 import config from "../config.json";
 
+
 export default function Start() {
     const [ pokemons, setPokemons ] = useState(null);
     const [ page, setPage ] = useState(1);
@@ -34,7 +35,7 @@ export default function Start() {
         const getPokeAPI = async () => {
             const offset = (page-1) * perPage;
             try {
-                const response = await fetch(`${config.apiURL}?limit=${perPage}&offset=${offset}`,{cache: 'no-cache'});
+                const response = await fetch(`${config.apiURL}/pokemon?limit=${perPage}&offset=${offset}`,{cache: 'no-cache'});
                 const json = await response.json();
     
                 // set data
